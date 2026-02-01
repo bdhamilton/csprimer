@@ -27,14 +27,26 @@ Since we know we'll sometimes need to send numbers greater than 255 over the wir
 
 We could also find a way of communicating where a number _ends_, so we never used more than the necessary amount of memory to store a number. This is the "varint" or "variable-width inteeger," which we're going to be implementing here. Varints are way of using the _fewest necessary bytes_ to encode a number.
 
-The strategy used by Protocol Buffers is to reserve the first bit in every byte for use as a _continuation_ bit: a message about whether this byte marks the end of the current number (in which case the bit is 0) or the number continues to the next (in which case the bit is 1). 
+The strategy used by Protocol Buffers is to reserve the most significant bit in every byte for use as a _continuation_ bit: a message about whether this byte marks the end of the current number (in which case the bit is 0) or the number continues to the next (in which case the bit is 1). 
 
-The tradeoff is that by reserving the first bit for a continuation marker, each byte can store only 7 digits of the number itself---128 possible values. (Thus a "base 128 varint.") But that allowance makes it possible to use much less space overall.
+The tradeoff is that by reserving the most significant bit for a continuation marker, each byte can store only 7 digits of the number itself---128 possible values. (Thus a "base 128 varint.") But that allowance makes it possible to use much less space overall.
 
 For reasons I don't know, protobuf sends multi-byte integers in little endian order. 
 
 The challenge here is how to write a function that converts a number in decimal to a base 128 varint in bytes, and another function that decodes it back.
 
-### The implementation background
+### Tooling and implementation
 
-There
+We're given three files: `1.uint64`, `150.uint64`, and `maxint.uint64`. These are 64-bit unsigned integers encoded as binary. Note that this is not a standard file extension; it's just been made up for this exercise.
+
+To read these files it's helpful to get comfortable with `hexdump`, a CLI interface that displays binary data. Use it this way: `hexdump -C 1.uint64`. The `-C` displays the data in a 'canonical' display format: the index of the starting byte, a list of eight bytes in hexadecimal, and a columnar representation of the ASCII values associated with that byte.
+
+We also need to get comfortable with binary operators. There are two sets of operators we need to know about:
+
+* Shift operators (`<<` and `>>`) can be thought of as mechanically shifting bits to the left or right. So `0b1 << 1 == 0b10` and `0b10 >> 1 == 0b1`. You can also think about it as multiplying or dividing by a power of two: `1 << 1 == 1 * 2^1 == 2` or `2 >> 1 == 2 / 2^1 == 1`. 
+* Bitwise logical operators (`AND`, `OR`, `XOR`, `NOT`) manipulate binary data in relation to other binary data. `AND` sets any bit that _both_ byte sequences both have on; `OR` sets any bit that _either_ sequence as in common; `XOR` sets any bits that _differ_; `NOT` inverts the bits. For this, we'll only need `AND` (`&`) and `OR` (`|`).
+
+A couple of import tools worth knowing about in Python:
+
+* When readisng binary data, we need to set that explicitly: `with open('1.uint64', 'rb') as f: ...`
+* Though this is a bit of magic to me at this point, it's worth knowing that `struct.unpack('>Q', binary_data)[0]` will transform an unsigned big-endian number in binary (`>Q` is how `struct` describes that data format) into a Python integer object. We need the `[0]` because `unpack` always returns a list of data even if, as in this case, we only have one values

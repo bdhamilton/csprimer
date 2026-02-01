@@ -1,3 +1,5 @@
+import struct
+
 def encode(x: int) -> bytes:
     remaining = x
     result = []
@@ -32,5 +34,19 @@ def decode(bytes: bytes) -> int:
 
     return result
 
-assert decode(b'\x96\x01') == 150
-print("test")
+def read_as_int(filepath) -> bytes:
+    with open(filepath, "rb") as f:
+        return f.read()
+    
+raw_binary = read_as_int("maxint.uint64")
+initial_int = struct.unpack('>Q', raw_binary)[0]
+encoded = encode(initial_int)
+decoded = decode(encoded)
+
+print(f"""
+Raw binary: {raw_binary} (type {type(raw_binary)})
+Converted to integer: {initial_int} (type {type(initial_int)})
+Encoded integer: {encoded} (type {type(encoded)})
+Decoded inter: {decoded} (type {type(decoded)})
+Matching? {decoded == initial_int}
+""")
