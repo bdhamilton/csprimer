@@ -6,3 +6,4 @@ A record of my work on [the Computer Systems course](https://csprimer.com/course
 
 ## Worklog
 
+**2026-02-01.** Finished watching the `varint` explainer and made final additions to [the notes](varint/README.md) about `hexdump`, binary operators, and working with binary in Python. Started watching [tehcniques for learning videos](https://csprimer.com/courses/programming/#learning).
