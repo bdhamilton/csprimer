@@ -15,4 +15,8 @@ def beep(n = 1):
     sys.stdout.flush()
     sleep(0.3)
 
-beep(5)
+try:
+  n = int(sys.stdin.read())
+  beep(n)
+except:
+  pass
