@@ -5,8 +5,17 @@ A record of my work on [the Computer Systems course](https://csprimer.com/course
 * [Protobuf varint](varint/)
 * [CSS color convert](color-convert/)
 * [Beep beep boop](beep-beep/)
+* [Image rotate](image-rotate/)
 
 ## Worklog
+
+**2026-06-16.** Finished implementaiton of [Image rotate](image-rotate/) and wrote up notes.
+
+**2026-06-15.** Wrote logic extracting core information from bitmap header.
+
+**2026-06-14.** Read about [bitmap files](https://en.wikipedia.org/wiki/BMP_file_format#DIB_header_(bitmap_information_header)) and figured out where the needed data was.
+
+**2026-06-13.** Signed back up and started `Image rotate`.
 
 **2026-02-26.** Watched the `Beep beep boop` video and made a bunch of corrections.
 
