@@ -9,7 +9,7 @@ A record of my work on [the Computer Systems course](https://csprimer.com/course
 
 ## Worklog
 
-**2026-06-16.** Finished implementaiton of [Image rotate](image-rotate/) and wrote up notes.
+**2026-06-16.** Finished [Image rotate](image-rotate/). Started and finished [TCP SYN flood](syn-flood/).
 
 **2026-06-15.** Wrote logic extracting core information from bitmap header.
 
