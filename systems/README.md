@@ -2,12 +2,39 @@
 
 A record of my work on [the Computer Systems course](https://csprimer.com/courses/systems/).
 
-* [Protobuf varint](varint/)
-* [CSS color convert](color-convert/)
-* [Beep beep boop](beep-beep/)
-* [Image rotate](image-rotate/)
+* Bits and bytes
+    * [Protobuf varint](varint/)
+    * [CSS color convert](color-convert/)
+    * [Beep beep boop](beep-beep/)
+    * [Image rotate](image-rotate/)
+    * [TCP SYN flood](syn-flood/)
+    * [UTF-8 truncat](utf8-truncate/)
+* Introduction to C
+    * [Hello, world!](hello-c/)
+    * [Bitcount](bitcount/)
+    * Fast pangram
+    * Dynamic array
+    * Varint C extension
+    * Basi hashmap
+* Low-level programming
+    * Assembly "Hello, world!"
+    * Sum to N
+    * Matrix access
+    * x86-64 pangram
+    * Binary convert
+    * Cone volume
+    * Low level recursion
+* CPU microarchitecture and low-level performance
+    * Faster sum
+    * Color quantizing
+* The memory hierarchy
+    * Grayscale speedup
+    * Pointer chase
+    * Bogosum
 
 ## Worklog
+
+**2026-06-2x.** Did [Bitcount](bitcount/) to learn the basics of C.
 
 **2026-06-21.** After a few days of fiddling, finished [UTF-8 truncate](utf8-truncate/).
 
